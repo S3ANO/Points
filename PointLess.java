@@ -2,6 +2,7 @@
 // A Point object represents a pair of (x, y) coordinates.
 // Seventh version: Immutable.
 // Class invariant: x >= 0 && y >= 0.
+import java.awt.*;
 public class PointLess {
     private int x;
     private int y;
@@ -86,5 +87,11 @@ public class PointLess {
         else{ 
             return false; 
         } 
+    }
+    public void drawPoints(Graphics g) {
+        g.fillOval(x, y, 5, 5);
+        g.setFont(new Font("Arial", Font.PLAIN, 20));
+        g.setColor(Color.WHITE);
+        g.drawString("(" + x + ", " + y + ")", x + 5, y + 5);
     }
 }

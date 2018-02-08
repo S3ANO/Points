@@ -1,36 +1,52 @@
 // A program that deals with 2D points.
 // Fifth version, to accompany immutable Point class.
+import java.awt.*;
+import java.util.Scanner;
+import java.util.ArrayList;
+
 public class PointMainLessHelp {
     public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        DrawingPanel panel = new DrawingPanel(500, 500);
+        Graphics g = panel.getGraphics();
+        int inputX;
+        int inputY;
+        ArrayList <PointLess> points = new ArrayList();
         // create two Point objects
-        PointLess p1 = new PointLess(5, 10);
-        PointLess p2 = new PointLess(7, 13);
-        PointLess p3 = new PointLess(2, 2);
+        System.out.println("type in x and y values for each point");
+        for (int i = 0; i < 3; i++) {
+            inputX = input.nextInt();
+            inputY = input.nextInt();
+            PointLess temp = new PointLess(inputX, inputY);
+            points.add(temp);
+        }
         
         // print each point and its distance from origin
-        System.out.println("p1 is " + p1);
-        System.out.println("p1 distance from origin = " + p1.distanceFromOrigin());
+        System.out.println("p1 is " + points.get(0));
+        System.out.println("p1 distance from origin = " + points.get(0).distanceFromOrigin());
 
-        System.out.println("p2 is " + p2);
-        System.out.println("p2 distance from origin = " + p2.distanceFromOrigin());
+        System.out.println("p2 is " + points.get(1));
+        System.out.println("p2 distance from origin = " + points.get(1).distanceFromOrigin());
 
         // translate each point to a new location
-        p1 = p1.translate(6, 1);
-        p2 = p2.translate(2, 3);
+        System.out.println("type in x and y translation values for each point");
+        points.set(0, points.get(0).translate(inputX = input.nextInt(), inputY = input.nextInt()));
+        points.set(1, points.get(1).translate(inputX = input.nextInt(), inputY = input.nextInt()));
 
         // print the points again
-        System.out.println("p1 translated is now " + p1);
-        System.out.println("p2 translated is now " + p2);
+        System.out.println("p1 translated is now " + points.get(0));
+        System.out.println("p2 translated is now " + points.get(1));
         
         // print the slope
-        System.out.println("slope of the two points is " + p1.slope(p2));
+        System.out.println("slope of the two points is " + points.get(0).slope(points.get(1)));
         
         // print the slope
-        if(p3.isCollinear(p1, p2) == true){
+        if(points.get(2).isCollinear(points.get(0), points.get(1)) == true){
             System.out.println("the points are collinear");
         }
-        else if(p3.isCollinear(p1, p2) == false){
+        else if(points.get(2).isCollinear(points.get(0), points.get(1)) == false){
             System.out.println("the points are not collinear");
         }
+        points.get(0).drawPoints(g);
     }
 }
